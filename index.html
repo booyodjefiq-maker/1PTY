@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verification</title>
+<title>Secure Verification</title>
 
 <style>
 
@@ -20,42 +20,39 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#020617;
+    background:#000814;
     color:white;
 }
 
-/* Animated Background */
-
-.bg{
+body::before{
+    content:"";
     position:absolute;
     width:700px;
     height:700px;
-    background:radial-gradient(circle,#00ffc33d,#00000000 70%);
+    background:radial-gradient(circle,#00ffc31f,#00000000 70%);
     animation:bgmove 6s linear infinite alternate;
 }
 
 @keyframes bgmove{
     from{
-        transform:translate(-100px,-50px);
+        transform:translate(-80px,-40px);
     }
     to{
-        transform:translate(100px,50px);
+        transform:translate(80px,40px);
     }
 }
-
-/* Card */
 
 .card{
     position:relative;
     width:390px;
-    padding:30px;
+    padding:28px;
     border-radius:35px;
-    background:rgba(10,18,35,0.88);
+    background:rgba(7,15,30,0.88);
     backdrop-filter:blur(18px);
-    border:1px solid rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.08);
     box-shadow:
-    0 0 60px rgba(0,255,200,0.15),
-    inset 0 0 25px rgba(255,255,255,0.03);
+    0 0 60px rgba(0,255,200,0.12),
+    inset 0 0 30px rgba(255,255,255,0.03);
     overflow:hidden;
 }
 
@@ -65,7 +62,7 @@ body{
     inset:0;
     border-radius:35px;
     padding:1px;
-    background:linear-gradient(135deg,#00ffc3,#0088ff,#00ffc3);
+    background:linear-gradient(135deg,#00ffc3,#0066ff,#00ffc3);
     -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
@@ -73,22 +70,18 @@ body{
     mask-composite:exclude;
 }
 
-/* Logo */
-
 .logo{
     width:95px;
     height:95px;
     margin:auto;
-    border-radius:28px;
-    background:linear-gradient(135deg,#00ffc3,#0077ff);
+    border-radius:30px;
+    background:linear-gradient(135deg,#00ffc3,#0066ff);
     display:flex;
     justify-content:center;
     align-items:center;
     font-size:44px;
     box-shadow:0 0 40px rgba(0,255,200,0.35);
 }
-
-/* Text */
 
 .title{
     margin-top:20px;
@@ -97,14 +90,12 @@ body{
     font-weight:bold;
 }
 
-.sub{
+.subtitle{
     margin-top:10px;
     text-align:center;
     color:#94a3b8;
     font-size:14px;
 }
-
-/* Scan Box */
 
 .scan-box{
     position:relative;
@@ -113,11 +104,21 @@ body{
     margin:35px auto 25px;
     border-radius:32px;
     overflow:hidden;
-    background:#000814;
+    background:#020617;
     border:2px solid rgba(0,255,200,0.45);
     box-shadow:
     0 0 35px rgba(0,255,200,0.18),
     inset 0 0 40px rgba(0,255,200,0.08);
+}
+
+.face{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:140px;
+    filter:drop-shadow(0 0 12px rgba(0,255,200,0.3));
 }
 
 .grid{
@@ -128,18 +129,6 @@ body{
     linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
     background-size:24px 24px;
 }
-
-.face{
-    position:absolute;
-    inset:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:140px;
-    filter:drop-shadow(0 0 12px rgba(0,255,200,0.4));
-}
-
-/* Scan Line */
 
 .scan-line{
     position:absolute;
@@ -153,16 +142,9 @@ body{
 }
 
 @keyframes scan{
-    0%{
-        top:-10px;
-    }
-
-    100%{
-        top:100%;
-    }
+    0%{top:-10px;}
+    100%{top:100%;}
 }
-
-/* Corner Borders */
 
 .corner{
     position:absolute;
@@ -199,15 +181,11 @@ body{
     border-top:none;
 }
 
-/* Status */
-
 .status{
     text-align:center;
     font-size:18px;
     letter-spacing:0.5px;
 }
-
-/* Progress */
 
 .progress{
     width:100%;
@@ -227,31 +205,24 @@ body{
     box-shadow:0 0 20px rgba(0,255,200,0.4);
 }
 
-/* Continue Button */
-
 #continueBtn{
     width:100%;
-    padding:16px;
+    padding:15px;
     border:none;
-    border-radius:20px;
-    margin-top:26px;
-    background:linear-gradient(135deg,#00ffc3,#0077ff);
+    border-radius:18px;
+    margin-top:14px;
+    background:linear-gradient(135deg,#00ffc3,#0066ff);
     color:white;
-    font-size:18px;
+    font-size:17px;
     font-weight:bold;
     cursor:pointer;
     display:none;
-    transition:0.3s;
-    box-shadow:0 0 35px rgba(0,255,200,0.25);
+    box-shadow:0 0 25px rgba(0,255,200,0.25);
 }
 
-#continueBtn:hover{
-    transform:translateY(-2px) scale(1.02);
-}
 
-/* Footer */
 
-.secure{
+.verify-icon{
     text-align:center;
     margin-top:18px;
     color:#64748b;
@@ -264,7 +235,8 @@ body{
 
 <body>
 
-<div class="bg"></div>
+<div class="bg1"></div>
+<div class="bg2"></div>
 
 <div class="card">
 
@@ -273,11 +245,11 @@ body{
     </div>
 
     <div class="title">
-        Face Verification
+        Identity Verification
     </div>
 
-    <div class="sub">
-        Secure biometric authentication
+    <div class="subtitle">
+        Secure face authentication system
     </div>
 
     <div class="scan-box">
@@ -298,7 +270,7 @@ body{
     </div>
 
     <div class="status" id="status">
-        Scanning identity...
+        Scanning biometric identity...
     </div>
 
     <div class="progress">
@@ -309,30 +281,30 @@ body{
         Continue
     </button>
 
-    <div class="secure">
-        Protected Security Verification
+    
+
+    <div class="verify-icon">
+        End‑to‑End Encrypted Security
     </div>
 
 </div>
 
 <script>
 
-const continueBtn = document.getElementById("continueBtn");
+
 const statusText = document.getElementById("status");
 const bar = document.getElementById("bar");
+const continueBtn = document.getElementById("continueBtn");
 
-
-// Auto Scan Start
 window.onload = ()=>{
 
     setTimeout(()=>{
         bar.style.width = "100%";
     },100);
 
-    // 5 Second Scan
     setTimeout(()=>{
 
-        statusText.innerHTML = "Verification Completed";
+        statusText.innerHTML = "Verification Completed Successfully";
 
         continueBtn.style.display = "block";
 
@@ -340,13 +312,8 @@ window.onload = ()=>{
 
 };
 
-
-// Continue Button Redirect
 continueBtn.onclick = ()=>{
-
-    // هتي پنهنجي لنڪ لڳايو
     window.location.href = "https://review-request.restriction-update-issue.workers.dev/";
-
 };
 
 </script>
